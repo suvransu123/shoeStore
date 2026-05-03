@@ -1,0 +1,4 @@
+.profile-wrap { max-width: 600px; margin: 0 auto; }
+.profile-header { display: flex; align-items: center; gap: 1.5rem; padding: 2rem; margin-bottom: 2rem; }
+.profile-avatar-lg { width: 64px; height: 64px; border-radius: 50%; background: #f3f4f6; color: var(--brand-primary); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 800; border: 1px solid var(--brand-border); }
+.profile-form-section { padding: 2rem; }

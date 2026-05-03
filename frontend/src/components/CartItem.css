@@ -1,0 +1,9 @@
+.cart-item { display: flex; align-items: center; gap: 1rem; padding: 1rem; }
+.cart-item-img { width: 80px; height: 80px; object-fit: cover; border-radius: var(--radius-md); }
+.cart-item-info { flex: 1; }
+.cart-item-name { font-size: 0.95rem; font-weight: 600; }
+.cart-item-meta { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem; }
+.qty-control { display: flex; align-items: center; border: 1px solid var(--brand-border); border-radius: var(--radius-sm); }
+.qty-btn { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; }
+.qty-value { width: 30px; text-align: center; font-size: 0.85rem; }
+.cart-item-price { font-weight: 700; margin: 0 1rem; }

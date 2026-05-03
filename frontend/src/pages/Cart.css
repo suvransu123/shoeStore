@@ -1,0 +1,7 @@
+.cart-layout { display: grid; grid-template-columns: 1fr 320px; gap: 2rem; }
+.cart-items-list { display: flex; flex-direction: column; gap: 1rem; }
+.cart-summary { padding: 1.5rem; position: sticky; top: 84px; }
+.summary-row { display: flex; justify-content: space-between; margin-bottom: 0.75rem; font-size: 0.9rem; }
+.summary-total { font-weight: 800; font-size: 1.1rem; border-top: 1px solid var(--brand-border); padding-top: 0.75rem; }
+
+@media (max-width: 900px) { .cart-layout { grid-template-columns: 1fr; } }
