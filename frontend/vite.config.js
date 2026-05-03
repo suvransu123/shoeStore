@@ -7,7 +7,7 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'https://shoestore-gwxp.onrender.com/',
+        target: 'https://shoestore-gwxp.onrender.com',
         changeOrigin: true,
       }
     }

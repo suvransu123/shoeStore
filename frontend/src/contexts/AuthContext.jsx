@@ -8,8 +8,8 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   // Global Axios Config
-  axios.defaults.baseURL = '/api';
-  axios.defaults.withCredentials = true; // IMPORTANT for cookies
+  axios.defaults.baseURL = import.meta.env.VITE_API_URL || '/api';
+  axios.defaults.withCredentials = true;
 
   // Restore Session on Load
   useEffect(() => {
