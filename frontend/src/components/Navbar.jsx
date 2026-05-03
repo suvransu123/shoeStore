@@ -32,12 +32,10 @@ export default function Navbar() {
   return (
     <nav className={`navbar ${scrolled ? 'navbar-scrolled' : ''}`}>
       <div className="navbar-inner container">
-        {/* Logo */}
         <Link to="/" className="navbar-brand">
           <span className="brand-name">SoleStyle</span>
         </Link>
 
-        {/* Desktop Nav Links */}
         <div className="navbar-links">
           <Link to="/" className={`nav-link ${isActive('/') ? 'nav-link-active' : ''}`}>Store</Link>
           <div className="nav-dropdown">
@@ -55,7 +53,6 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* Desktop Actions */}
         <div className="navbar-actions">
           {user ? (
             <>
@@ -76,7 +73,6 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* Mobile hamburger */}
         <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
           <span></span>
           <span></span>
@@ -84,7 +80,6 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Menu */}
       <div className={`mobile-menu ${menuOpen ? 'mobile-menu-open' : ''}`}>
         <Link to="/" className="mobile-link">Store</Link>
         <div className="mobile-category-group">

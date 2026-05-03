@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../contexts/AuthContext.jsx';
 import { useCart } from '../contexts/CartContext.jsx';
 import './ProductDetails.css';
@@ -57,27 +58,66 @@ export default function ProductDetails() {
       <span key={i} className={`star ${i < Math.round(rating) ? '' : 'empty'}`}>★</span>
     ));
 
-  if (loading) return <div className="loading-center container"><div className="spinner" /></div>;
+  if (loading) return (
+    <div className="loading-center container">
+      <motion.div 
+        animate={{ rotate: 360 }}
+        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+        className="spinner" 
+      />
+    </div>
+  );
+  
   if (!product) return null;
 
   return (
-    <div className="page-content container">
-      <button onClick={() => navigate(-1)} className="back-btn">Back</button>
+    <motion.div 
+      className="page-content container"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <motion.button 
+        initial={{ x: -10, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        onClick={() => navigate(-1)} 
+        className="back-btn"
+      >
+        ← Back
+      </motion.button>
 
       <div className="product-detail-grid">
-        {/* Image */}
-        <div className="detail-image-wrap">
+        {/* Image Section */}
+        <motion.div 
+          className="detail-image-wrap"
+          initial={{ x: -50, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           <img
             src={product.image || PLACEHOLDER_IMG}
             alt={product.name}
             className="detail-image"
             onError={e => { e.target.src = PLACEHOLDER_IMG; }}
           />
-          {product.isFeatured && <span className="detail-badge-featured">Featured</span>}
-        </div>
+          {product.isFeatured && (
+            <motion.span 
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              className="detail-badge-featured"
+            >
+              Featured
+            </motion.span>
+          )}
+        </motion.div>
 
-        {/* Info */}
-        <div className="detail-info">
+        {/* Info Section */}
+        <motion.div 
+          className="detail-info"
+          initial={{ x: 50, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           <span className="detail-category badge badge-primary">{product.category}</span>
           <p className="detail-brand">{product.brand}</p>
           <h1 className="heading-lg detail-name">{product.name}</h1>
@@ -99,13 +139,14 @@ export default function ProductDetails() {
               <h4 className="option-label">Size: <span>{selectedSize}</span></h4>
               <div className="size-grid">
                 {product.sizes.map(size => (
-                  <button
+                  <motion.button
                     key={size}
+                    whileTap={{ scale: 0.95 }}
                     onClick={() => setSelectedSize(size)}
                     className={`size-btn ${selectedSize === size ? 'size-btn-active' : ''}`}
                   >
                     {size}
-                  </button>
+                  </motion.button>
                 ))}
               </div>
             </div>
@@ -117,13 +158,12 @@ export default function ProductDetails() {
               <h4 className="option-label">Color: <span>{selectedColor}</span></h4>
               <div className="color-options">
                 {product.colors.map(color => (
-                  <button
+                  <motion.button
                     key={color}
+                    whileTap={{ scale: 0.9 }}
                     onClick={() => setSelectedColor(color)}
                     className={`color-chip ${selectedColor === color ? 'color-chip-active' : ''}`}
-                  >
-                    {color}
-                  </button>
+                  />
                 ))}
               </div>
             </div>
@@ -142,22 +182,24 @@ export default function ProductDetails() {
             </div>
           </div>
 
-          <button
+          <motion.button
             id="add-to-cart-btn"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             onClick={handleAddToCart}
             className="btn btn-primary btn-lg btn-full"
             disabled={adding || product.stock === 0}
           >
             {adding ? 'Adding...' : product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
-          </button>
+          </motion.button>
 
           {user?.role === 'admin' && (
             <button onClick={() => navigate(`/edit-product/${product._id}`)} className="btn btn-secondary btn-full" style={{ marginTop: '0.75rem' }}>
               Edit Product
             </button>
           )}
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 }

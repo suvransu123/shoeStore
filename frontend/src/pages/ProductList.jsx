@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { motion } from 'framer-motion';
 import { useAuth } from '../contexts/AuthContext.jsx';
 import ProductCard from '../components/ProductCard.jsx';
 import './ProductList.css';
@@ -15,8 +16,8 @@ export default function ProductList() {
   const [sort, setSort] = useState('newest');
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
-   const { user } = useAuth();
-   const navigate = useNavigate();
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   const fetchProducts = async () => {
     setLoading(true);
@@ -47,23 +48,52 @@ export default function ProductList() {
     setMinPrice(''); setMaxPrice('');
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1
+    }
+  };
+
   return (
     <div className="page-content container">
-      {/* Page Header */}
       <div className="page-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div>
+        <motion.div
+          initial={{ x: -20, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+        >
           <h1 className="heading-lg">Shoe Store</h1>
           <p>Discover our collection of premium footwear</p>
-        </div>
+        </motion.div>
         {user?.role === 'admin' && (
-          <button onClick={() => navigate('/add-product')} className="btn btn-primary">
+          <motion.button 
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            onClick={() => navigate('/add-product')} 
+            className="btn btn-primary"
+          >
             + Add Product
-          </button>
+          </motion.button>
         )}
       </div>
 
-      {/* Search Bar */}
-      <div className="search-bar-wrap">
+      <motion.div 
+        className="search-bar-wrap"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2 }}
+      >
         <input
           id="search-input"
           type="text"
@@ -74,10 +104,14 @@ export default function ProductList() {
           style={{ paddingLeft: '1rem' }}
         />
         {search && <button className="search-clear" onClick={() => setSearch('')}>Clear</button>}
-      </div>
+      </motion.div>
 
-      {/* Filters Section */}
-      <div className="filters-container card">
+      <motion.div 
+        className="filters-container card"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 }}
+      >
         <div className="filter-row">
           <div className="filter-group">
             <label className="filter-label">Category</label>
@@ -114,9 +148,32 @@ export default function ProductList() {
 
           <button onClick={clearFilters} className="clear-filters-btn">Reset</button>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Products Area */}
+      <motion.div 
+        className="hero-banner"
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.4, duration: 0.6 }}
+      >
+        <div className="banner-content">
+          <motion.h2 
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.6 }}
+          >
+            Step Into Style
+          </motion.h2>
+          <motion.p
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.7 }}
+          >
+            Discover our new seasonal collection with premium materials and unmatched comfort.
+          </motion.p>
+        </div>
+      </motion.div>
+
       <main className="products-area">
         <div className="products-toolbar">
           <p className="results-count">
@@ -133,11 +190,18 @@ export default function ProductList() {
             <button onClick={clearFilters} className="btn btn-primary" style={{ marginTop: '1rem' }}>Clear Filters</button>
           </div>
         ) : (
-          <div className="products-grid">
+          <motion.div 
+            className="products-grid"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
             {products.map(product => (
-              <ProductCard key={product._id} product={product} onDelete={handleDelete} />
+              <motion.div key={product._id} variants={itemVariants}>
+                <ProductCard product={product} onDelete={handleDelete} />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         )}
       </main>
     </div>

@@ -21,6 +21,7 @@
   align-items: center;
   gap: 0.5rem;
 }
+
 .brand-name {
   font-size: 1.25rem;
   font-weight: 800;
@@ -39,8 +40,15 @@
   font-weight: 500;
   color: var(--text-secondary);
 }
-.nav-link:hover { color: var(--brand-primary); }
-.nav-link-active { color: var(--brand-primary); font-weight: 600; }
+
+.nav-link:hover {
+  color: var(--brand-primary);
+}
+
+.nav-link-active {
+  color: var(--brand-primary);
+  font-weight: 600;
+}
 
 .navbar-actions {
   display: flex;
@@ -52,6 +60,7 @@
   position: relative;
   font-size: 1.2rem;
 }
+
 .cart-badge {
   position: absolute;
   top: -5px;
@@ -80,7 +89,11 @@
 }
 
 /* Dropdown */
-.nav-dropdown { position: relative; cursor: pointer; }
+.nav-dropdown {
+  position: relative;
+  cursor: pointer;
+}
+
 .nav-dropdown-content {
   display: none;
   position: absolute;
@@ -93,23 +106,50 @@
   min-width: 150px;
   padding: 0.5rem 0;
 }
-.nav-dropdown:hover .nav-dropdown-content { display: block; }
+
+.nav-dropdown:hover .nav-dropdown-content {
+  display: block;
+}
+
 .nav-dropdown-content a {
   display: block;
   padding: 0.5rem 1rem;
   font-size: 0.85rem;
   color: var(--text-secondary);
 }
-.nav-dropdown-content a:hover { background: #f3f4f6; color: var(--brand-primary); }
 
-.hamburger { display: none; flex-direction: column; gap: 4px; }
-.hamburger span { width: 20px; height: 2px; background: var(--text-primary); }
+.nav-dropdown-content a:hover {
+  background: #f3f4f6;
+  color: var(--brand-primary);
+}
 
-.mobile-menu { display: none; }
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hamburger span {
+  width: 20px;
+  height: 2px;
+  background: var(--text-primary);
+}
+
+.mobile-menu {
+  display: none;
+}
 
 @media (max-width: 768px) {
-  .navbar-links, .navbar-actions { display: none; }
-  .hamburger { display: flex; }
+
+  .navbar-links,
+  .navbar-actions {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
   .mobile-menu {
     display: block;
     position: absolute;
@@ -122,6 +162,14 @@
     overflow: hidden;
     transition: max-height 0.2s;
   }
-  .mobile-menu-open { max-height: 500px; }
-  .mobile-link { display: block; padding: 1rem; border-bottom: 1px solid #f3f4f6; }
+
+  .mobile-menu-open {
+    max-height: 500px;
+  }
+
+  .mobile-link {
+    display: block;
+    padding: 1rem;
+    border-bottom: 1px solid #f3f4f6;
+  }
 }
