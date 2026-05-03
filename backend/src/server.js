@@ -14,7 +14,9 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: ["http://localhost:5173", "http://localhost:5174"], // Fixed typo 'htpp'
+  origin: ["http://localhost:5173", "http://localhost:5174","https://shoestore-gwxp.onrender.com/",
+    "https://shoestroe.vercel.app/"
+  ], // Fixed typo 'htpp'
   credentials: true,
 }));
 
