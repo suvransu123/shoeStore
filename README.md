@@ -88,7 +88,8 @@ npm run dev
 Open your browser and navigate to the local URL provided by Vite (usually `http://localhost:5173`).
 
 ---
-
+### live link 
+https://shoestroe.vercel.app/
 ##  Backend Dependencies
 - `bcryptjs`: Password hashing.
 - `cloudinary`: Image storage API.
